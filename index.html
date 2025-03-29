@@ -3,12 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/css/normalize.css" />
     <link rel="stylesheet" href="/css/styles.css" />
     <script defer src="js/script.js"></script>
     <title>Event Keycodes</title>
   </head>
   <body>
-    <main></main>
+    <main class="container">
+      <header id="initial-text" class="initial-text">
+        <h1>Event KeyCodes</h1>
+        <p>Press any key to get the JavaScript event keycode info</p>
+      </header>
+
+      <section id="key-info" class="key-info">
+        <!-- MAIN KEY PRESSED -->
+        <article class="key-card main-key">
+          <div class="key-label">Key Pressed</div>
+          <div id="key-pressed" class="key-value"></div>
+        </article>
+
+        <!-- MODIFIER KEYS SECTION -->
+        <section class="modifiers-section">
+          <div class="key-label">Modifiers</div>
+          <div class="modifiers-container">
+            <div id="shift-key" class="modifier-key">Shift</div>
+            <div id="ctrl-key" class="modifier-key">Ctrl</div>
+            <div id="alt-key" class="modifier-key">Alt</div>
+            <div id="meta-key" class="modifier-key">Meta</div>
+          </div>
+        </section>
+
+        <!-- EVENT DETAILS -->
+        <article class="key-card">
+          <div class="key-label">event.key</div>
+          <div id="event-key" class="key-value"></div>
+        </article>
+
+        <article class="key-card">
+          <div class="key-label">event.keyCode</div>
+          <div id="event-keycode" class="key-value"></div>
+        </article>
+
+        <article class="key-card">
+          <div class="key-label">event.code</div>
+          <div id="event-code" class="key-value"></div>
+        </article>
+
+        <article class="key-card">
+          <div class="key-label">event.which</div>
+          <div id="event-which" class="key-value"></div>
+        </article>
+
+        <!-- BASE KEY (when using Shift) -->
+        <article id="base-key-card" class="key-card">
+          <div class="key-label">event.which</div>
+          <div id="event-which" class="key-value"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <p>Press <kbd>ESC</kbd> to reset</p>
+    </footer>
   </body>
 </html>
