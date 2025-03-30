@@ -13,6 +13,22 @@
   --inactive-modifier: #e5e7eb;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #818cf8;
+    --primary-light: #6366f1;
+    --primary-dark: #4f46e5;
+    --text-color: #f9fafb;
+    --text-light: #d1d5db;
+    --background-color: #111827;
+    --card-background: #1f2937;
+    --card-border: #374151;
+    --card-shadow: rgba(0, 0, 0, 0.2);
+    --active-modifier: #818cf8;
+    --inactive-modifier: #374151;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -57,8 +73,9 @@ body {
 }
 
 .key-info {
-  /* display: none; */
+  display: none;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -166,5 +183,43 @@ kbd {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .key-info {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .initial-text h1 {
+    font-size: 2rem;
+  }
+
+  .initial-text p {
+    font-size: 1rem;
+  }
+
+  .key-value {
+    font-size: 1.25rem;
+  }
+
+  .main-key .key-value {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .key-info {
+    grid-template-columns: 1fr;
+  }
+
+  .modifiers-container {
+    gap: 0.5rem;
+  }
+
+  .modifier-key {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
   }
 }
