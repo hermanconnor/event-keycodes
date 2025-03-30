@@ -61,7 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
       displayKey = 'Empty';
     }
 
+    // Update main key display
     keyPressed.textContent = displayKey;
+
+    // Update other elements
+    eventKey.textContent = displayKey;
+    eventKeycode.textContent = event.keyCode;
+    eventCode.textContent = event.code;
+    eventWhich.textContent = event.which;
   }
 
   document.addEventListener('keydown', (e) => {
@@ -76,5 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide the `initialText` and show `keyInfo`
     initialText.style.display = 'none';
     keyInfo.style.display = 'grid';
+
+    updateKeyInfo(e);
   });
 });
