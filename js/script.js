@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const altKey = document.getElementById('alt-key');
   const metaKey = document.getElementById('meta-key');
 
-  // Hide key info initially
+  // Hide `keyInfo` initially
   keyInfo.style.display = 'none';
 
   const shiftKeyMap = {
@@ -50,7 +50,36 @@ document.addEventListener('DOMContentLoaded', () => {
     reverseShiftKeyMap[value] = key;
   }
 
-  function updateKeyInfo(event) {
+  const updateModifierKeys = (event) => {
+    shiftKey.classList.toggle('active', event.shiftKey);
+    ctrlKey.classList.toggle('active', event.ctrlKey);
+    altKey.classList.toggle('active', event.altKey);
+    metaKey.classList.toggle('active', event.metaKey);
+  };
+
+  const handleBaseKey = (event) => {
+    // Show base key card only when relevant
+    baseKeyCard.style.display = 'none';
+
+    // Handle shift key combinations
+    if (event.shiftKey) {
+      // For letter keys (uppercase)
+      if (event.key.length === 1 && /[A-Z]/.test(event.key)) {
+        baseKey.textContent = event.key.toLowerCase();
+        baseKeyCard.style.display = 'block';
+      }
+      // For special characters (shift + another key)
+      else if (event.key.length === 1 && event.key in reverseShiftKeyMap) {
+        baseKey.textContent = reverseShiftKeyMap[event.key];
+        baseKeyCard.style.display = 'block';
+      } else if (!['Shift', 'Control', 'Alt', 'Meta'].includes(event.key)) {
+        baseKey.textContent = event.key;
+        baseKeyCard.style.display = 'block';
+      }
+    }
+  };
+
+  const updateKeyInfo = (event) => {
     let displayKey = event.key;
 
     if (displayKey === ' ') {
@@ -64,13 +93,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update main key display
     keyPressed.textContent = displayKey;
 
+    // Update modifier keys
+    updateModifierKeys(event);
+
     // Update other elements
     eventKey.textContent = displayKey;
     eventKeycode.textContent = event.keyCode;
     eventCode.textContent = event.code;
     eventWhich.textContent = event.which;
-  }
 
+    // Handle base key for shift combinations
+    handleBaseKey(event);
+  };
+
+  // EVENT LISTENERS
   document.addEventListener('keydown', (e) => {
     if (
       ['Space', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'ArrowRight'].includes(
@@ -84,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initialText.style.display = 'none';
     keyInfo.style.display = 'grid';
 
+    // Update DOM Elements
     updateKeyInfo(e);
   });
 });
