@@ -106,6 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
     handleBaseKey(event);
   };
 
+  const resetApp = () => {
+    initialText.style.display = 'block';
+    keyInfo.style.display = 'none';
+
+    shiftKey.classList.remove('active');
+    ctrlKey.classList.remove('active');
+    altKey.classList.remove('active');
+    metaKey.classList.remove('active');
+
+    keyPressed.textContent = '';
+    eventKey.textContent = '';
+    eventKeycode.textContent = '';
+    eventCode.textContent = '';
+    eventWhich.textContent = '';
+    baseKey.textContent = '';
+  };
+
   // EVENT LISTENERS
   document.addEventListener('keydown', (e) => {
     if (
@@ -114,6 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
       )
     ) {
       e.preventDefault();
+    }
+
+    if (e.key === 'Escape') {
+      resetApp();
+      return;
     }
 
     // Hide the `initialText` and show `keyInfo`
